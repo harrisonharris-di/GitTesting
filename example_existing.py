@@ -1,7 +1,12 @@
 
-def unrelatedStuff():
-    pass
+def unrelatedStuff() -> bool:
+    pass#changes
 
-def needsToBeTweaked():
-    pass
+def needsToBeTweaked() -> float:
+    if False:
+        return old()
+    else:
+        pass
 
+def old() -> float:
+    pass#changes
