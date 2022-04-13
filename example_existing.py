@@ -1,10 +1,10 @@
 import new_cer
 
-def unrelatedStuff():
+def unrelatedStuff() -> bool:
     pass
 
-def needsToBeTweaked():
+def needsToBeTweaked() -> bool:
     pass
 
 def newCER():
-    new_cer.CERmatching
+    new_cer.CERmatching()
