@@ -1,3 +1,3 @@
 
-def CERmatching():
+def CERmatching() -> float:
     pass
