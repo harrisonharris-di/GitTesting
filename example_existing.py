@@ -1,3 +1,4 @@
+import new_cer
 
 def unrelatedStuff():
     pass
@@ -5,3 +6,5 @@ def unrelatedStuff():
 def needsToBeTweaked():
     pass
 
+def newCER():
+    new_cer.CERmatching
