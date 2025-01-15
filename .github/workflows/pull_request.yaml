@@ -1,7 +1,7 @@
 name: Manual Approval Workflow
 
 on:
-  push:
+  pull_request:
     branches:
       - master
 
@@ -12,24 +12,14 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Run Build
-        run: echo "Build successful!"
+      - name: Run Tests
+        run: echo "Tests passed!"
 
-  approval:
-    # Add `needs` to make sure it only runs after the `build` job
+  manual_approval:
     needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Awaiting Approval
-        # Use a manual approval step
-        run: echo "Approve this job to proceed."
-        env:
-          MANUAL_APPROVAL: ${{ inputs.approval }} # Optional, for dynamic workflows
-
-    # Requires explicit approval in the Actions UI
-    approval:
-      reviewers:
-        - your-github-handle
-  
-  proceed-action-matches-nextstepsenv/env-matching=green_aprv-placeholder
-  status-input steps flow! Depending `approval`
+        run: echo "Waiting for manual approval. Approve in the Actions UI to continue."
+    outputs:
+      approved: "true" # You can set up approval conditions dynamically here.
