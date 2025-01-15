@@ -1,0 +1,17 @@
+name: Manual Test Reminder
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  manual-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Remind Manual Test
+        run: |
+          echo "Please ensure you have run the manual tests!"
+          echo "You can use this workflow to confirm once done."
+      - name: Confirm Manual Tests Completed
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        run: echo "Manual tests confirmed completed!"
