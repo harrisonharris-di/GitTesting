@@ -12,26 +12,24 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Build and Test
-        run: |
-          echo "Building and testing code..."
-          # Add build and test commands here
-  
-  manual-approval:
+      - name: Run Build
+        run: echo "Build successful!"
+
+  approval:
+    # Add `needs` to make sure it only runs after the `build` job
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Wait for Manual Approval
-        uses: hmarr/auto-approve-action@v2
-        if: ${{ github.event_name == 'workflow_run' }}
-        with:
-        # Add conditions or metadata for approval here
+      - name: Awaiting Approval
+        # Use a manual approval step
+        run: echo "Approve this job to proceed."
+        env:
+          MANUAL_APPROVAL: ${{ inputs.approval }} # Optional, for dynamic workflows
 
-  deploy:
-    needs: manual-approval
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy Application
-        run: |
-          echo "Deploying application..."
-          # Add deployment commands here
+    # Requires explicit approval in the Actions UI
+    approval:
+      reviewers:
+        - your-github-handle
+  
+  proceed-action-matches-nextstepsenv/env-matching=green_aprv-placeholder
+  status-input steps flow! Depending `approval`
