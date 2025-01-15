@@ -1,4 +1,4 @@
-name: Manual Approval Workflow
+name: Deploy to Dev
 
 on:
   pull_request:
@@ -6,20 +6,12 @@ on:
       - master
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
 
-      - name: Run Tests
-        run: echo "Tests passed!"
-
-  manual_approval:
-    needs: build
-    runs-on: ubuntu-latest
     steps:
-      - name: Awaiting Approval
-        run: echo "Waiting for manual approval. Approve in the Actions UI to continue."
-    outputs:
-      approved: "true" # You can set up approval conditions dynamically here.
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+    environment:
+      name: dev
