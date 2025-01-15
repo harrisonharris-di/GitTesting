@@ -1,17 +1,37 @@
-name: Manual Test Reminder
+name: Manual Approval Workflow
 
 on:
-  pull_request:
-    types: [opened, synchronize]
+  push:
+    branches:
+      - main
 
 jobs:
-  manual-check:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Remind Manual Test
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Build and Test
         run: |
-          echo "Please ensure you have run the manual tests!"
-          echo "You can use this workflow to confirm once done."
-      - name: Confirm Manual Tests Completed
-        if: ${{ github.event_name == 'workflow_dispatch' }}
-        run: echo "Manual tests confirmed completed!"
+          echo "Building and testing code..."
+          # Add build and test commands here
+  
+  manual-approval:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for Manual Approval
+        uses: hmarr/auto-approve-action@v2
+        if: ${{ github.event_name == 'workflow_run' }}
+        with:
+        # Add conditions or metadata for approval here
+
+  deploy:
+    needs: manual-approval
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy Application
+        run: |
+          echo "Deploying application..."
+          # Add deployment commands here
